@@ -57,6 +57,11 @@ def identify_drupal(url):
 			response = requests.get(urldrupal)
 			(flag, version_cms) = drupalFunc (response)
 
+		elif flag == False:
+			urldrupal =  url + "core/CHANGELOG.txt"
+			response = requests.get(urldrupal)
+			(flag, version_cms) = drupalFunc (response)			
+
 	finally:
 		return flag, version_cms
 
@@ -70,7 +75,7 @@ def getVulnerability(res):
 	headers = res.headers
 	status = None
 	for header in headers:
-		if header == "X-Original-URL detected":
+		if header == "X-Original-URL":
 			status = "X-Original-URL detected"
 		elif header == "X-Rewrite-URL":
 			status = "X-Rewrite-URL detected"
